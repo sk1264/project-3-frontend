@@ -1,5 +1,11 @@
+import React from 'react';
+
 function Home(props) {
-    return <h1>Home</h1>;
-  }
-  
-  export default Home;
+  const centerStyle = {
+    textAlign: 'center'
+  };
+
+  return <h1 style={centerStyle}>Felled Monsters of Hyrule</h1>;
+}
+
+export default Home;
