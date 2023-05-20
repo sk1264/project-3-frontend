@@ -6,6 +6,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function Header() {
   return (
+
+    <Nav className="justify-content-center" activeKey="/home">
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">&#129321;</Navbar.Brand>
@@ -29,6 +31,8 @@ function Header() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    </Nav>
+
   );
 }
 
