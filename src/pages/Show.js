@@ -6,7 +6,7 @@ import Accordion from 'react-bootstrap/Accordion';
 function Show() {
     return (
 		<div className="show">
-		<Figure>
+		<Figure classname='img'>
 			<Figure.Image
 				width={171}
 				height={180}
