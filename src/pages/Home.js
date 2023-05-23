@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import './styles.css';
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
-import { monstersLoader } from '../loaders';
+import MonsterCard from '../components/MonsterCard';
 
 function Home() {
   const centerStyle = {
@@ -23,9 +22,14 @@ function Home() {
 
   const [monstersData, setMonstersData] = useState([]);
 
-  useEffect(async () => {
-    const monsters = await monstersLoader();
-    setMonstersData(monsters);
+  const fetchMonsters = async () => {
+    const response = await fetch("https://zelda-backend.onrender.com/monsters");
+    const data = await response.json();
+    setMonstersData(data);
+  };
+
+  useEffect(() => {
+    fetchMonsters();
   }, []);
 
   const monstersMarkup = (
@@ -38,8 +42,7 @@ function Home() {
               <Card.Img variant="top" src={monster.image} />
               <Card.Body>
                 <Card.Title>{monster.name}</Card.Title>
-                {/* <Card.Text>{monster.description}</Card.Text> */}
-                <Button variant="success">See Details</Button>
+                <Button variant="success" as={Link} to={`/show/${monster.id}`}>See Details</Button>
               </Card.Body>
               <ListGroup className="list-group-flush">
                 <ListGroup.Item>{monster.difficulty}</ListGroup.Item>
@@ -53,7 +56,18 @@ function Home() {
     </div>
   );
 
-  return monstersData.length > 0 ? monstersMarkup : <div>Loading</div>;
+  let monsterList;
+
+  if (monstersData) {
+    monsterList = monstersData.map((monster, index) => {
+      return <MonsterCard key={index} monster={monster} />;
+    });
+  }
+  return (
+    <div>
+      {monstersData.length > 0 ? monstersMarkup : <div>Loading</div>}
+    </div>
+  );
 }
 
 export default Home;
