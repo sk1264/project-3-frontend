@@ -1,10 +1,12 @@
 import React from 'react'
+import { useParams } from "react-router-dom";
 import './Edit.css'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 		  
 function Edit() {
+	
     return (
 		<div className="edit">
 			<Form>

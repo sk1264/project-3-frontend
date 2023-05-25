@@ -5,9 +5,9 @@ import Figure from 'react-bootstrap/Figure';
 import Accordion from 'react-bootstrap/Accordion';
 
 function Show() {
-  const [monster, setMonsterState] = useState(null);
+  const [monsterState, setMonsterState] = useState("");
 
-  const [number, setNumber] = useState(5);
+  const [number, setNumber] = useState();
  
   const { id } = useParams();
   console.log(useParams());
@@ -19,7 +19,7 @@ function Show() {
 
   useEffect(() => {
     const fetchMonster = async () => {
-      console.log("going to fetch person with id of: ", id);
+      console.log("going to fetch monster with id of: ", id);
       try {
         const responseData = await fetch(url);
         const monsterData = await responseData.json(); //converting our html response that we got from the server into a useable person {object}.
@@ -36,25 +36,6 @@ function Show() {
     fetchMonster(); //fetching data and setting state
   }, [id, number]);
 
-//   useEffect(() => {
-//     const fetchedMonster = {
-//       name: 'Monster Name',
-//       image: 'monster-image-url',
-//       commonLocation: 'Monster Location',
-//       description: 'Monster Description',
-//       difficulty: 'Monster Difficulty',
-//       tips: 'Monster Tips',
-//       date: 'Monster Date',
-//       defeated: true,
-//     };
-
-//     setMonster(fetchedMonster);
-//   }, []);
-
-//   if (!monster) {
-//     return <div>Loading...</div>;
-//   }
-
   return (
     <div className="show">
       <Figure className='img'>
@@ -62,48 +43,52 @@ function Show() {
           width={171}
           height={180}
           alt="171x180"
-          src={monster.image}
+          src={monsterState.image}
         />
         <Figure.Caption>
-          {monster.name}
+          {monsterState.name}
         </Figure.Caption>
       </Figure>
 
       <Accordion>
         <Accordion.Item eventKey="0">
-          <Accordion.Header>{monster.commonLocation}</Accordion.Header>
+          <Accordion.Header>Monster Location</Accordion.Header>
           <Accordion.Body>
-            Divine Beast Vah Naboris
+		  {monsterState.commonLocation}
           </Accordion.Body>
         </Accordion.Item>
 
         <Accordion.Item eventKey="1">
-          <Accordion.Header>{monster.description}</Accordion.Header>
+          <Accordion.Header>Description</Accordion.Header>
           <Accordion.Body>
-            {monster.description}
+            {monsterState.description}
           </Accordion.Body>
         </Accordion.Item>
 
         <Accordion.Item eventKey="2">
-          <Accordion.Header>{monster.difficulty}</Accordion.Header>
+          <Accordion.Header>Difficulty</Accordion.Header>
           <Accordion.Body>
-            {monster.difficulty}
+            {monsterState.difficulty}
           </Accordion.Body>
         </Accordion.Item>
 
         <Accordion.Item eventKey="3">
           <Accordion.Header>Tips</Accordion.Header>
           <Accordion.Body>
-            {monster.tips}
+            {monsterState.tips}
           </Accordion.Body>
         </Accordion.Item>
 
         <Accordion.Item eventKey="4">
           <Accordion.Header>Defeated</Accordion.Header>
           <Accordion.Body>
-            {monster.defeated ? '✅' : '❌'}
+            {monsterState.defeated ? '✅' : '❌'}
           </Accordion.Body>
         </Accordion.Item>
+
+		<Link to={`/${monsterState._id}/edit`}>
+			<button>Edit</button>
+		</Link>
       </Accordion>
     </div>
   );

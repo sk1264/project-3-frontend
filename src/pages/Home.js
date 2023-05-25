@@ -26,6 +26,7 @@ function Home() {
     const response = await fetch("https://zelda-backend.onrender.com/monsters");
     const data = await response.json();
     setMonstersData(data);
+    console.log(data)
   };
 
   useEffect(() => {
@@ -42,7 +43,7 @@ function Home() {
               <Card.Img variant="top" src={monster.image} />
               <Card.Body>
                 <Card.Title>{monster.name}</Card.Title>
-                <Button variant="success" as={Link} to={`/show/${monster.id}`}>See Details</Button>
+                <Button variant="success" as={Link} to={`/show/${monster._id}`}>See Details</Button>
               </Card.Body>
               <ListGroup className="list-group-flush">
                 <ListGroup.Item>{monster.difficulty}</ListGroup.Item>

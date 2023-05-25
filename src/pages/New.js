@@ -36,7 +36,7 @@ function NewMonsterFunc() {
     };
 
     const responseData = await fetch(
-      "https://zelda-backend.onrender.com/monsters",
+      "https://zelda-backend.onrender.com/monsters/",
       options
     );
 

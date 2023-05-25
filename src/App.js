@@ -1,5 +1,5 @@
 import "./index.css";
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -16,8 +16,9 @@ function App() {
       <Routes>
         <Route exact={true} path="/" element={<Home />} />
         <Route path="/new" element={<New />} />
-        <Route path=":id/show" element={<Show />} />
+        <Route path="/show/:id" element={<Show />} />
         <Route path="/:id/edit" element={<Edit />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />
     </div>
